@@ -26,6 +26,7 @@
   "actions.elevate": "Elevate",
   "actions.simplify": "Simplify",
   "actions.shoppingList": "Shopping List",
+  "actions.customizePlaceholder": "Optional: Add your preferences (e.g., 'make it spicy', 'no dairy')...",
   "actions.copyList": "Copy List",
   "actions.backToRecipe": "Back to Recipe",
   "actions.copied": "Copied!",

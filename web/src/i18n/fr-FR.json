@@ -26,6 +26,7 @@
   "actions.elevate": "Élever",
   "actions.simplify": "Simplifier",
   "actions.shoppingList": "Liste de courses",
+  "actions.customizePlaceholder": "Optionnel : Ajoutez vos préférences (ex. 'plus épicé', 'sans lactose')...",
   "actions.copyList": "Copier la liste",
   "actions.backToRecipe": "Retour à la recette",
   "actions.copied": "Copié !",

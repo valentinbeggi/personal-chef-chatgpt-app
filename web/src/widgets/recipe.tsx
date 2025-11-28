@@ -1,6 +1,6 @@
 import "@/index.css";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { mountWidget, useToolOutput, useToolResponseMetadata, useOpenAiGlobal, useCallTool } from "skybridge/web";
 import { Maximize2, Minimize2, PictureInPicture2 } from "lucide-react";
 
@@ -68,6 +68,12 @@ function RecipeWidget() {
   const theme = useOpenAiGlobal("theme") as "light" | "dark" | undefined;
   const locale = useOpenAiGlobal("locale") as string | undefined;
   const displayMode = useOpenAiGlobal("displayMode") as DisplayMode | undefined;
+  const widgetState = useOpenAiGlobal("widgetState") as {
+    activeTab?: TabId;
+    unitSystem?: UnitSystem;
+    servings?: number | null;
+  } | null;
+
   const { callToolAsync, isPending: isShoppingListLoading } = useCallTool<
     ShoppingListToolArgs,
     ShoppingListToolResponse
@@ -77,28 +83,46 @@ function RecipeWidget() {
   const currentMode = displayMode ?? "pip";
 
   const [view, setView] = useState<ViewMode>("recipe");
-  const [activeTab, setActiveTab] = useState<TabId>("ingredients");
-  const [unitSystem, setUnitSystem] = useState<UnitSystem>("imperial");
-  const [servings, setServings] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<TabId>(widgetState?.activeTab ?? "ingredients");
+  const [unitSystem, setUnitSystem] = useState<UnitSystem>(widgetState?.unitSystem ?? "imperial");
+  const [servings, setServings] = useState<number | null>(widgetState?.servings ?? null);
   const [shoppingList, setShoppingList] = useState<ShoppingList | null>(null);
 
   const effectiveServings = servings ?? meta?.recipe.servings ?? 4;
 
-  const handleElevate = useCallback(() => {
-    if (!meta?.recipe.name) return;
+  useEffect(() => {
+    window.openai?.setWidgetState?.({
+      activeTab,
+      unitSystem,
+      servings,
+    });
+  }, [activeTab, unitSystem, servings]);
 
-    const prompt = `Elevate this ${meta.recipe.name} recipe to be chef-level with premium ingredients, advanced techniques, and gourmet presentation. Keep the same general dish concept but make it restaurant-quality.`;
+  const handleElevate = useCallback(
+    (customization?: string) => {
+      if (!meta?.recipe.name) return;
 
-    window.openai?.sendFollowUpMessage?.({ prompt });
-  }, [meta?.recipe.name]);
+      const basePrompt = `Create an elevated, chef-level version of ${meta.recipe.name}. Generate a completely new recipe with premium ingredients, advanced techniques, and gourmet presentation. Keep the same dish concept but make it restaurant-quality.`;
+      const customPart = customization ? ` Additional request: ${customization}.` : "";
+      const prompt = `${basePrompt}${customPart} You MUST call the "recipe" widget again with all the new recipe details (name, description, cuisine, servings, prep_time_minutes, cook_time_minutes, difficulty, ingredients, instructions, tags, dietary_info, chef_tips, substitutions) to display the elevated version.`;
 
-  const handleSimplify = useCallback(() => {
-    if (!meta?.recipe.name) return;
+      window.openai?.sendFollowUpMessage?.({ prompt });
+    },
+    [meta?.recipe.name],
+  );
 
-    const prompt = `Simplify this ${meta.recipe.name} recipe for a beginner cook. Use fewer ingredients, simpler techniques, and common pantry staples. Make it approachable while keeping the dish recognizable.`;
+  const handleSimplify = useCallback(
+    (customization?: string) => {
+      if (!meta?.recipe.name) return;
 
-    window.openai?.sendFollowUpMessage?.({ prompt });
-  }, [meta?.recipe.name]);
+      const basePrompt = `Create a simplified, beginner-friendly version of ${meta.recipe.name}. Generate a completely new recipe with fewer ingredients, simpler techniques, and common pantry staples. Keep the dish recognizable but make it approachable.`;
+      const customPart = customization ? ` Additional request: ${customization}.` : "";
+      const prompt = `${basePrompt}${customPart} You MUST call the "recipe" widget again with all the new recipe details (name, description, cuisine, servings, prep_time_minutes, cook_time_minutes, difficulty, ingredients, instructions, tags, dietary_info, chef_tips, substitutions) to display the simplified version.`;
+
+      window.openai?.sendFollowUpMessage?.({ prompt });
+    },
+    [meta?.recipe.name],
+  );
 
   const handleShoppingList = useCallback(async () => {
     if (!meta?.recipe) return;

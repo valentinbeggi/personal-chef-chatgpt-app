@@ -38,6 +38,10 @@ export function RecipeCard({
   isShoppingListLoading,
   messages,
 }: RecipeCardProps) {
+  // Scale factor for nutrition when servings change
+  const scaleFactor = servings / recipe.servings;
+
+  // Per-serving nutrition stays the same (it's per serving, not total)
   const scaledNutrition: NutritionData = {
     calories: meta.nutrition_per_serving.calories,
     protein_g: meta.nutrition_per_serving.protein_g,
@@ -47,6 +51,12 @@ export function RecipeCard({
     sugar_g: meta.nutrition_per_serving.sugar_g,
     sodium_mg: meta.nutrition_per_serving.sodium_mg,
   };
+
+  // Scale the breakdown (individual ingredient calories scale with quantity)
+  const scaledBreakdown = meta.nutrition_breakdown.map((item) => ({
+    ...item,
+    calories: item.calories * scaleFactor,
+  }));
 
   return (
     <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
@@ -73,7 +83,7 @@ export function RecipeCard({
           <InstructionsTab instructions={recipe.instructions} chefTips={recipe.chef_tips} messages={messages} />
         )}
         {activeTab === "nutrition" && (
-          <NutritionTab nutrition={scaledNutrition} breakdown={meta.nutrition_breakdown} messages={messages} />
+          <NutritionTab nutrition={scaledNutrition} breakdown={scaledBreakdown} messages={messages} />
         )}
       </div>
 
