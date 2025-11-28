@@ -1,0 +1,56 @@
+{
+  "tabs.ingredients": "Ingrédients",
+  "tabs.instructions": "Instructions",
+  "tabs.nutrition": "Nutrition",
+
+  "labels.servings": "{count, plural, one {# portion} other {# portions}}",
+  "labels.minutes": "{count} min",
+  "labels.hours": "{count} h",
+  "labels.calories": "Calories",
+  "labels.protein": "Protéines",
+  "labels.carbs": "Glucides",
+  "labels.fat": "Lipides",
+  "labels.fiber": "Fibres",
+  "labels.sugar": "Sucres",
+  "labels.sodium": "Sodium",
+  "labels.perServing": "par portion",
+  "labels.totalTime": "Temps total",
+  "labels.prepTime": "Préparation",
+  "labels.cookTime": "Cuisson",
+  "labels.step": "Étape {number}",
+  "labels.tip": "Conseil",
+  "labels.chefTips": "Conseils du Chef",
+  "labels.substitutions": "Substitutions",
+  "labels.items": "{checked}/{total} articles",
+
+  "actions.elevate": "Élever",
+  "actions.simplify": "Simplifier",
+  "actions.shoppingList": "Liste de courses",
+  "actions.copyList": "Copier la liste",
+  "actions.backToRecipe": "Retour à la recette",
+  "actions.copied": "Copié !",
+  "actions.clearAll": "Tout effacer",
+
+  "shopping.title": "Liste de courses",
+  "shopping.sections.produce": "Fruits & Légumes",
+  "shopping.sections.meat_seafood": "Viandes & Poissons",
+  "shopping.sections.dairy_eggs": "Produits laitiers & Œufs",
+  "shopping.sections.bakery": "Boulangerie",
+  "shopping.sections.frozen": "Surgelés",
+  "shopping.sections.pantry": "Épicerie",
+  "shopping.sections.spices": "Épices",
+  "shopping.sections.other": "Autre",
+
+  "units.label": "Unités",
+  "units.imperial": "Impérial",
+  "units.metric": "Métrique",
+
+  "difficulty.easy": "Facile",
+  "difficulty.medium": "Moyen",
+  "difficulty.hard": "Difficile",
+
+  "nutrition.breakdown": "Répartition des calories",
+  "nutrition.macros": "Macronutriments",
+  "nutrition.ofDaily": "de la valeur quotidienne"
+}
+

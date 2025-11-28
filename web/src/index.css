@@ -3,11 +3,23 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ===========================
+   Personal Chef Theme
+   A warm, culinary-inspired palette
+   =========================== */
+
 @theme inline {
+  /* Font families */
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+
+  /* Border radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Color mappings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -41,80 +53,299 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ===========================
+   Light Mode - Warm Kitchen
+   Cream, terracotta, and herb-inspired
+   =========================== */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+
+  /* Warm cream background with subtle warmth */
+  --background: oklch(0.985 0.008 75);
+  --foreground: oklch(0.22 0.02 45);
+
+  /* Card - slightly warmer white */
+  --card: oklch(0.995 0.005 75);
+  --card-foreground: oklch(0.22 0.02 45);
+
+  /* Popover */
+  --popover: oklch(0.995 0.005 75);
+  --popover-foreground: oklch(0.22 0.02 45);
+
+  /* Primary - Terracotta/burnt sienna (warm, appetizing) */
+  --primary: oklch(0.52 0.14 35);
+  --primary-foreground: oklch(0.98 0.01 75);
+
+  /* Secondary - Sage/herb green undertone */
+  --secondary: oklch(0.95 0.015 110);
+  --secondary-foreground: oklch(0.28 0.025 45);
+
+  /* Muted - Warm neutral */
+  --muted: oklch(0.94 0.012 75);
+  --muted-foreground: oklch(0.48 0.02 45);
+
+  /* Accent - Golden wheat */
+  --accent: oklch(0.92 0.04 85);
+  --accent-foreground: oklch(0.25 0.025 45);
+
+  /* Destructive - Paprika red */
+  --destructive: oklch(0.58 0.22 25);
+
+  /* Borders - Warm taupe */
+  --border: oklch(0.88 0.015 60);
+  --input: oklch(0.91 0.012 60);
+  --ring: oklch(0.52 0.14 35);
+
+  /* Chart colors - Food-inspired palette */
+  --chart-1: oklch(0.65 0.18 45);    /* Tomato */
+  --chart-2: oklch(0.62 0.15 145);   /* Basil */
+  --chart-3: oklch(0.72 0.14 85);    /* Turmeric */
+  --chart-4: oklch(0.55 0.12 260);   /* Eggplant */
+  --chart-5: oklch(0.68 0.16 25);    /* Carrot */
+
+  /* Sidebar */
+  --sidebar: oklch(0.975 0.01 75);
+  --sidebar-foreground: oklch(0.22 0.02 45);
+  --sidebar-primary: oklch(0.52 0.14 35);
+  --sidebar-primary-foreground: oklch(0.98 0.01 75);
+  --sidebar-accent: oklch(0.92 0.04 85);
+  --sidebar-accent-foreground: oklch(0.25 0.025 45);
+  --sidebar-border: oklch(0.88 0.015 60);
+  --sidebar-ring: oklch(0.52 0.14 35);
 }
 
+/* ===========================
+   Dark Mode - Evening Kitchen
+   Rich, moody, candlelit ambiance
+   =========================== */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  /* Deep charcoal with warm undertone */
+  --background: oklch(0.16 0.015 45);
+  --foreground: oklch(0.94 0.01 75);
+
+  /* Card - slightly lifted */
+  --card: oklch(0.20 0.018 45);
+  --card-foreground: oklch(0.94 0.01 75);
+
+  /* Popover */
+  --popover: oklch(0.20 0.018 45);
+  --popover-foreground: oklch(0.94 0.01 75);
+
+  /* Primary - Warm copper/terracotta glow */
+  --primary: oklch(0.68 0.15 45);
+  --primary-foreground: oklch(0.15 0.02 45);
+
+  /* Secondary - Muted herb */
+  --secondary: oklch(0.26 0.02 110);
+  --secondary-foreground: oklch(0.92 0.01 75);
+
+  /* Muted */
+  --muted: oklch(0.26 0.015 45);
+  --muted-foreground: oklch(0.65 0.02 75);
+
+  /* Accent - Amber glow */
+  --accent: oklch(0.32 0.04 70);
+  --accent-foreground: oklch(0.92 0.02 75);
+
+  /* Destructive */
+  --destructive: oklch(0.65 0.2 25);
+
+  /* Borders */
+  --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --ring: oklch(0.68 0.15 45);
+
+  /* Chart colors - Jewel tones */
+  --chart-1: oklch(0.70 0.18 40);    /* Copper */
+  --chart-2: oklch(0.65 0.14 160);   /* Jade */
+  --chart-3: oklch(0.75 0.15 90);    /* Gold */
+  --chart-4: oklch(0.60 0.16 290);   /* Amethyst */
+  --chart-5: oklch(0.68 0.18 20);    /* Coral */
+
+  /* Sidebar */
+  --sidebar: oklch(0.18 0.018 45);
+  --sidebar-foreground: oklch(0.94 0.01 75);
+  --sidebar-primary: oklch(0.68 0.15 45);
+  --sidebar-primary-foreground: oklch(0.15 0.02 45);
+  --sidebar-accent: oklch(0.32 0.04 70);
+  --sidebar-accent-foreground: oklch(0.92 0.02 75);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.68 0.15 45);
 }
 
+/* ===========================
+   Base Styles
+   =========================== */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), Georgia, serif;
   }
 }
+
+/* ===========================
+   Custom Utilities
+   =========================== */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+
+  /* Gradient text utility */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  /* Subtle pattern overlay */
+  .pattern-dots {
+    background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* Recipe card hover effect */
+  .recipe-card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .recipe-card-hover:hover {
+    @apply shadow-lg shadow-primary/5;
+    transform: translateY(-2px);
+  }
+
+  /* Ingredient checkbox animation */
+  .ingredient-check {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .ingredient-check:active {
+    transform: scale(0.95);
+  }
+
+  /* Smooth tab transitions */
+  .tab-content-enter {
+    animation: tabEnter 0.2s ease-out;
+  }
+
+  @keyframes tabEnter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Loading shimmer */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--muted) 0%,
+      var(--card) 50%,
+      var(--muted) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Nutrition bar animation */
+  .nutrition-bar {
+    animation: barGrow 0.6s ease-out forwards;
+    transform-origin: left;
+  }
+
+  @keyframes barGrow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* ===========================
+   Component Overrides
+   =========================== */
+@layer components {
+  /* Action button styles */
+  .btn-elevate {
+    @apply bg-gradient-to-r from-violet-500 to-purple-600;
+    @apply hover:from-violet-600 hover:to-purple-700;
+    @apply shadow-md shadow-violet-500/20 hover:shadow-lg hover:shadow-violet-500/30;
+  }
+
+  .btn-simplify {
+    @apply bg-gradient-to-r from-emerald-500 to-teal-600;
+    @apply hover:from-emerald-600 hover:to-teal-700;
+    @apply shadow-md shadow-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/30;
+  }
+
+  /* Tab styling */
+  .tab-active {
+    @apply text-primary border-primary;
+    position: relative;
+  }
+
+  .tab-active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    @apply bg-primary rounded-full;
+  }
+
+  /* Macro card gradients */
+  .macro-calories {
+    @apply from-orange-50 to-orange-100/50 dark:from-orange-950/40 dark:to-orange-900/20;
+    @apply border-orange-200 dark:border-orange-800/50;
+    @apply text-orange-700 dark:text-orange-300;
+  }
+
+  .macro-protein {
+    @apply from-blue-50 to-blue-100/50 dark:from-blue-950/40 dark:to-blue-900/20;
+    @apply border-blue-200 dark:border-blue-800/50;
+    @apply text-blue-700 dark:text-blue-300;
+  }
+
+  .macro-carbs {
+    @apply from-amber-50 to-amber-100/50 dark:from-amber-950/40 dark:to-amber-900/20;
+    @apply border-amber-200 dark:border-amber-800/50;
+    @apply text-amber-700 dark:text-amber-300;
+  }
+
+  .macro-fat {
+    @apply from-rose-50 to-rose-100/50 dark:from-rose-950/40 dark:to-rose-900/20;
+    @apply border-rose-200 dark:border-rose-800/50;
+    @apply text-rose-700 dark:text-rose-300;
+  }
+}
+
+/* ===========================
+   Google Fonts Import
+   DM Serif Display + DM Sans pairing
+   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap');

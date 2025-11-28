@@ -1,0 +1,2 @@
+export { ShoppingListView } from "./ShoppingList";
+

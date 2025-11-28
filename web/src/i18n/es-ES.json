@@ -1,0 +1,56 @@
+{
+  "tabs.ingredients": "Ingredientes",
+  "tabs.instructions": "Instrucciones",
+  "tabs.nutrition": "Nutrición",
+
+  "labels.servings": "{count, plural, one {# porción} other {# porciones}}",
+  "labels.minutes": "{count} min",
+  "labels.hours": "{count} h",
+  "labels.calories": "Calorías",
+  "labels.protein": "Proteínas",
+  "labels.carbs": "Carbohidratos",
+  "labels.fat": "Grasas",
+  "labels.fiber": "Fibra",
+  "labels.sugar": "Azúcares",
+  "labels.sodium": "Sodio",
+  "labels.perServing": "por porción",
+  "labels.totalTime": "Tiempo total",
+  "labels.prepTime": "Preparación",
+  "labels.cookTime": "Cocción",
+  "labels.step": "Paso {number}",
+  "labels.tip": "Consejo",
+  "labels.chefTips": "Consejos del Chef",
+  "labels.substitutions": "Sustituciones",
+  "labels.items": "{checked}/{total} artículos",
+
+  "actions.elevate": "Elevar",
+  "actions.simplify": "Simplificar",
+  "actions.shoppingList": "Lista de compras",
+  "actions.copyList": "Copiar lista",
+  "actions.backToRecipe": "Volver a la receta",
+  "actions.copied": "¡Copiado!",
+  "actions.clearAll": "Borrar todo",
+
+  "shopping.title": "Lista de compras",
+  "shopping.sections.produce": "Frutas y Verduras",
+  "shopping.sections.meat_seafood": "Carnes y Pescados",
+  "shopping.sections.dairy_eggs": "Lácteos y Huevos",
+  "shopping.sections.bakery": "Panadería",
+  "shopping.sections.frozen": "Congelados",
+  "shopping.sections.pantry": "Despensa",
+  "shopping.sections.spices": "Especias",
+  "shopping.sections.other": "Otros",
+
+  "units.label": "Unidades",
+  "units.imperial": "Imperial",
+  "units.metric": "Métrico",
+
+  "difficulty.easy": "Fácil",
+  "difficulty.medium": "Medio",
+  "difficulty.hard": "Difícil",
+
+  "nutrition.breakdown": "Desglose de calorías",
+  "nutrition.macros": "Macronutrientes",
+  "nutrition.ofDaily": "del valor diario"
+}
+

@@ -1,9 +1,9 @@
 {
-  "name": "@apps-sdk-template/server",
-  "version": "0.0.1",
+  "name": "@personal-chef-app/server",
+  "version": "1.0.0",
   "private": true,
   "main": "dist/index.js",
-  "description": "Alpic MCP Server Template",
+  "description": "Personal Chef ChatGPT App - MCP Server",
   "files": [
     "dist"
   ],

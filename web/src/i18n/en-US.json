@@ -1,0 +1,56 @@
+{
+  "tabs.ingredients": "Ingredients",
+  "tabs.instructions": "Instructions",
+  "tabs.nutrition": "Nutrition",
+
+  "labels.servings": "{count, plural, one {# serving} other {# servings}}",
+  "labels.minutes": "{count} min",
+  "labels.hours": "{count} hr",
+  "labels.calories": "Calories",
+  "labels.protein": "Protein",
+  "labels.carbs": "Carbs",
+  "labels.fat": "Fat",
+  "labels.fiber": "Fiber",
+  "labels.sugar": "Sugar",
+  "labels.sodium": "Sodium",
+  "labels.perServing": "per serving",
+  "labels.totalTime": "Total Time",
+  "labels.prepTime": "Prep",
+  "labels.cookTime": "Cook",
+  "labels.step": "Step {number}",
+  "labels.tip": "Tip",
+  "labels.chefTips": "Chef Tips",
+  "labels.substitutions": "Substitutions",
+  "labels.items": "{checked}/{total} items",
+
+  "actions.elevate": "Elevate",
+  "actions.simplify": "Simplify",
+  "actions.shoppingList": "Shopping List",
+  "actions.copyList": "Copy List",
+  "actions.backToRecipe": "Back to Recipe",
+  "actions.copied": "Copied!",
+  "actions.clearAll": "Clear All",
+
+  "shopping.title": "Shopping List",
+  "shopping.sections.produce": "Produce",
+  "shopping.sections.meat_seafood": "Meat & Seafood",
+  "shopping.sections.dairy_eggs": "Dairy & Eggs",
+  "shopping.sections.bakery": "Bakery",
+  "shopping.sections.frozen": "Frozen",
+  "shopping.sections.pantry": "Pantry",
+  "shopping.sections.spices": "Spices",
+  "shopping.sections.other": "Other",
+
+  "units.label": "Units",
+  "units.imperial": "Imperial",
+  "units.metric": "Metric",
+
+  "difficulty.easy": "Easy",
+  "difficulty.medium": "Medium",
+  "difficulty.hard": "Hard",
+
+  "nutrition.breakdown": "Calorie Breakdown",
+  "nutrition.macros": "Macronutrients",
+  "nutrition.ofDaily": "of daily value"
+}
+
