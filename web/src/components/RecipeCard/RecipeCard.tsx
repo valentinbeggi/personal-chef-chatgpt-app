@@ -16,8 +16,8 @@ interface RecipeCardProps {
   onUnitSystemChange: (system: UnitSystem) => void;
   servings: number;
   onServingsChange: (servings: number) => void;
-  onElevate: () => void;
-  onSimplify: () => void;
+  onElevate: (customization?: string) => void;
+  onSimplify: (customization?: string) => void;
   onShoppingList: () => void;
   isShoppingListLoading: boolean;
   messages: Record<string, string>;

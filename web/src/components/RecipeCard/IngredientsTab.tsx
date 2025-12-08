@@ -108,7 +108,7 @@ export function IngredientsTab({
 
                       <span className={cn("flex-1", isChecked && "line-through")}>
                         <span className="font-medium text-foreground">{measurement}</span>{" "}
-                        <span className="text-foreground/90">{ingredient.name}</span>
+                        <span className="text-foreground/90">{ingredient.displayName}</span>
                         {ingredient.notes && <span className="text-muted-foreground">, {ingredient.notes}</span>}
                       </span>
 

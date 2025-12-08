@@ -172,3 +172,4 @@ export function formatTimeRange(prepMinutes: number, cookMinutes: number): strin
   const total = prepMinutes + cookMinutes;
   return formatTime(total);
 }
+

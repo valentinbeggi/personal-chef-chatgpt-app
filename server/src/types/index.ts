@@ -3,11 +3,12 @@
 // ============================================
 
 export interface IngredientInput {
-  name: string;
+  englishName: string; // English name for USDA nutrition API lookup
   quantity: number;
   unit: string;
   category: IngredientCategory;
   notes?: string;
+  displayName: string; // Localized name for display (in user's language)
 }
 
 export interface InstructionInput {
@@ -60,11 +61,12 @@ export interface NutritionData {
 // Ingredient with an ID (generated server-side) and nutrition data
 export interface IngredientWithNutrition {
   id: string;
-  name: string;
+  englishName: string; // English name (used for nutrition API)
   quantity: number;
   unit: string;
   category: IngredientCategory;
   notes?: string;
+  displayName: string; // Localized name for display
   nutrition: NutritionData;
 }
 
@@ -125,7 +127,8 @@ export interface ShoppingListInput {
   desired_servings: number;
   ingredients: Array<{
     id: string;
-    name: string;
+    englishName: string; // English name
+    displayName: string; // Localized name for display
     quantity: number;
     unit: string;
     category: IngredientCategory;

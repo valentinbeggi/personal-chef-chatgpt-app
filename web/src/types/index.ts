@@ -2,14 +2,7 @@
 // Shared Types (aligned with server)
 // ===========================
 
-export type IngredientCategory =
-  | "produce"
-  | "meat_seafood"
-  | "dairy_eggs"
-  | "bakery"
-  | "frozen"
-  | "pantry"
-  | "spices";
+export type IngredientCategory = "produce" | "meat_seafood" | "dairy_eggs" | "bakery" | "frozen" | "pantry" | "spices";
 
 export type Difficulty = "easy" | "medium" | "hard";
 
@@ -41,11 +34,12 @@ export interface NutritionBreakdownItem {
 
 export interface Ingredient {
   id: string;
-  name: string;
+  englishName: string; // English name (used for nutrition API lookup)
   quantity: number;
   unit: string;
   category: IngredientCategory;
   notes?: string;
+  displayName: string; // Localized name for display (in user's language)
   nutrition: NutritionData;
 }
 

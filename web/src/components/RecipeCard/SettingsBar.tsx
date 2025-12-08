@@ -46,7 +46,7 @@ export function SettingsBar({
               "px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
               unitSystem === "imperial"
                 ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {messages["units.imperial"]}
@@ -57,7 +57,7 @@ export function SettingsBar({
               "px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
               unitSystem === "metric"
                 ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {messages["units.metric"]}
@@ -68,7 +68,9 @@ export function SettingsBar({
       {/* Servings Control */}
       <div className="flex items-center gap-2">
         <span className="text-sm text-muted-foreground">
-          {messages["labels.servings"]?.replace("{count, plural, one {# serving} other {# servings}}", "") || "Servings"}:
+          {messages["labels.servings"]?.replace("{count, plural, one {# serving} other {# servings}}", "") ||
+            "Servings"}
+          :
         </span>
         <div className="inline-flex items-center gap-1 bg-muted rounded-lg p-1">
           <button
@@ -77,24 +79,22 @@ export function SettingsBar({
             className={cn(
               "w-8 h-8 flex items-center justify-center rounded-md transition-colors",
               "hover:bg-background hover:shadow-sm",
-              "disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:shadow-none"
+              "disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:shadow-none",
             )}
             aria-label="Decrease servings"
           >
             <Minus className="w-4 h-4" />
           </button>
-          
-          <span className="w-8 text-center text-sm font-semibold tabular-nums">
-            {servings}
-          </span>
-          
+
+          <span className="w-8 text-center text-sm font-semibold tabular-nums">{servings}</span>
+
           <button
             onClick={increaseServings}
             disabled={servings >= maxServings}
             className={cn(
               "w-8 h-8 flex items-center justify-center rounded-md transition-colors",
               "hover:bg-background hover:shadow-sm",
-              "disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:shadow-none"
+              "disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:shadow-none",
             )}
             aria-label="Increase servings"
           >

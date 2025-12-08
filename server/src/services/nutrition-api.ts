@@ -258,3 +258,4 @@ export function calculatePerServing(totalNutrition: NutritionData, servings: num
     sodium_mg: Math.round(totalNutrition.sodium_mg / servings),
   };
 }
+

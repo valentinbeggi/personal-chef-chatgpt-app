@@ -52,6 +52,11 @@
 
   "nutrition.breakdown": "Répartition des calories",
   "nutrition.macros": "Macronutriments",
-  "nutrition.ofDaily": "de la valeur quotidienne"
-}
+  "nutrition.ofDaily": "de la valeur quotidienne",
 
+  "email.placeholder": "Entrez votre adresse email...",
+  "email.send": "Envoyer",
+  "email.sent": "Envoyé !",
+  "email.invalidEmail": "Veuillez entrer une adresse email valide",
+  "email.sendFailed": "Échec de l'envoi. Veuillez réessayer."
+}

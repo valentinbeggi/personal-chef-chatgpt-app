@@ -28,7 +28,8 @@ type ShoppingListToolArgs = {
   desired_servings: number;
   ingredients: Array<{
     id: string;
-    name: string;
+    englishName: string;
+    displayName: string;
     quantity: number;
     unit: string;
     category: IngredientCategory;
@@ -62,6 +63,28 @@ interface ShoppingListToolResponse {
   meta: Record<string, unknown>;
 }
 
+type SendEmailToolArgs = {
+  email: string;
+  recipe_name: string;
+  servings: number;
+  sections: Array<{
+    name: string;
+    emoji: string;
+    items: Array<{
+      display: string;
+      checked: boolean;
+    }>;
+  }>;
+};
+
+interface SendEmailToolResponse {
+  content: { type: "text"; text: string }[];
+  structuredContent: { success: boolean; email: string };
+  isError: boolean;
+  result: string;
+  meta: Record<string, unknown>;
+}
+
 function RecipeWidget() {
   const structuredContent = useToolOutput() as RecipeStructuredContent | null;
   const meta = useToolResponseMetadata() as RecipeMeta | null;
@@ -78,6 +101,11 @@ function RecipeWidget() {
     ShoppingListToolArgs,
     ShoppingListToolResponse
   >("generate_shopping_list");
+
+  const { callToolAsync: sendEmailAsync, isPending: isEmailSending } = useCallTool<
+    SendEmailToolArgs,
+    SendEmailToolResponse
+  >("send_shopping_list_email");
 
   const messages = useMemo(() => getMessages(locale || "en-US"), [locale]);
   const currentMode = displayMode ?? "pip";
@@ -102,9 +130,9 @@ function RecipeWidget() {
     (customization?: string) => {
       if (!meta?.recipe.name) return;
 
-      const basePrompt = `Create an elevated, chef-level version of ${meta.recipe.name}. Generate a completely new recipe with premium ingredients, advanced techniques, and gourmet presentation. Keep the same dish concept but make it restaurant-quality.`;
-      const customPart = customization ? ` Additional request: ${customization}.` : "";
-      const prompt = `${basePrompt}${customPart} You MUST call the "recipe" widget again with all the new recipe details (name, description, cuisine, servings, prep_time_minutes, cook_time_minutes, difficulty, ingredients, instructions, tags, dietary_info, chef_tips, substitutions) to display the elevated version.`;
+      const prompt = customization
+        ? `Elevate ${meta.recipe.name} to chef-level, but with this change: "${customization}". This overrides core ingredients/concept if specified. Call the "recipe" widget with the new recipe.`
+        : `Elevate ${meta.recipe.name} to chef-level with premium ingredients and advanced techniques. Call the "recipe" widget with the new recipe.`;
 
       window.openai?.sendFollowUpMessage?.({ prompt });
     },
@@ -115,9 +143,9 @@ function RecipeWidget() {
     (customization?: string) => {
       if (!meta?.recipe.name) return;
 
-      const basePrompt = `Create a simplified, beginner-friendly version of ${meta.recipe.name}. Generate a completely new recipe with fewer ingredients, simpler techniques, and common pantry staples. Keep the dish recognizable but make it approachable.`;
-      const customPart = customization ? ` Additional request: ${customization}.` : "";
-      const prompt = `${basePrompt}${customPart} You MUST call the "recipe" widget again with all the new recipe details (name, description, cuisine, servings, prep_time_minutes, cook_time_minutes, difficulty, ingredients, instructions, tags, dietary_info, chef_tips, substitutions) to display the simplified version.`;
+      const prompt = customization
+        ? `Simplify ${meta.recipe.name} for beginners, but with this change: "${customization}". This overrides core ingredients/concept if specified. Call the "recipe" widget with the new recipe.`
+        : `Simplify ${meta.recipe.name} for beginners with fewer ingredients and simpler techniques. Call the "recipe" widget with the new recipe.`;
 
       window.openai?.sendFollowUpMessage?.({ prompt });
     },
@@ -134,7 +162,8 @@ function RecipeWidget() {
         desired_servings: effectiveServings,
         ingredients: meta.recipe.ingredients.map((i) => ({
           id: i.id,
-          name: i.name,
+          englishName: i.englishName,
+          displayName: i.displayName,
           quantity: i.quantity,
           unit: i.unit,
           category: i.category,
@@ -176,6 +205,34 @@ function RecipeWidget() {
   const handleBackToRecipe = useCallback(() => {
     setView("recipe");
   }, []);
+
+  const handleSendEmail = useCallback(
+    async (email: string): Promise<boolean> => {
+      if (!shoppingList) return false;
+
+      try {
+        const result = await sendEmailAsync({
+          email,
+          recipe_name: shoppingList.recipe_name,
+          servings: shoppingList.servings,
+          sections: shoppingList.sections.map((section) => ({
+            name: section.name,
+            emoji: section.emoji,
+            items: section.items.map((item) => ({
+              display: item.display,
+              checked: item.checked,
+            })),
+          })),
+        });
+
+        return !result?.isError;
+      } catch (error) {
+        console.error("Failed to send email:", error);
+        return false;
+      }
+    },
+    [shoppingList, sendEmailAsync],
+  );
 
   const handleServingsChange = useCallback((newServings: number) => {
     setServings(newServings);
@@ -268,7 +325,13 @@ function RecipeWidget() {
           messages={messages}
         />
       ) : shoppingList ? (
-        <ShoppingListView shoppingList={shoppingList} onBackToRecipe={handleBackToRecipe} messages={messages} />
+        <ShoppingListView
+          shoppingList={shoppingList}
+          onBackToRecipe={handleBackToRecipe}
+          onSendEmail={handleSendEmail}
+          isEmailSending={isEmailSending}
+          messages={messages}
+        />
       ) : null}
     </div>
   );

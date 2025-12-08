@@ -52,6 +52,12 @@
 
   "nutrition.breakdown": "Desglose de calorías",
   "nutrition.macros": "Macronutrientes",
-  "nutrition.ofDaily": "del valor diario"
+  "nutrition.ofDaily": "del valor diario",
+
+  "email.placeholder": "Ingresa tu correo electrónico...",
+  "email.send": "Enviar",
+  "email.sent": "¡Enviado!",
+  "email.invalidEmail": "Por favor ingresa un correo válido",
+  "email.sendFailed": "Error al enviar. Inténtalo de nuevo."
 }
 

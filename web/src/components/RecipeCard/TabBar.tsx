@@ -24,9 +24,7 @@ export function TabBar({ activeTab, onTabChange, messages }: TabBarProps) {
           className={cn(
             "flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all",
             "hover:bg-muted/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-            activeTab === id
-              ? "text-primary border-b-2 border-primary -mb-[1px]"
-              : "text-muted-foreground"
+            activeTab === id ? "text-primary border-b-2 border-primary -mb-[1px]" : "text-muted-foreground",
           )}
           aria-selected={activeTab === id}
           role="tab"

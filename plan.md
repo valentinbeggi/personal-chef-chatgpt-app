@@ -103,7 +103,7 @@ A personal chef ChatGPT App that helps users:
 import { McpServer } from "skybridge/server";
 
 const server = new McpServer({
-  name: "personal-chef-app",
+  name: "personal-chef",
   version: "1.0.0",
 });
 
@@ -489,7 +489,7 @@ RecipeWidget
 ## Project Structure
 
 ```
-personal-chef-app/
+personal-chef/
 │
 ├── server/
 │   ├── src/
