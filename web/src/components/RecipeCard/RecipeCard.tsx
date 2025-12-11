@@ -6,6 +6,7 @@ import { InstructionsTab } from "./InstructionsTab";
 import { NutritionTab } from "./NutritionTab";
 import { RecipeActions } from "./RecipeActions";
 import { SettingsBar } from "./SettingsBar";
+import { ChefHat, Sparkles } from "lucide-react";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -16,10 +17,7 @@ interface RecipeCardProps {
   onUnitSystemChange: (system: UnitSystem) => void;
   servings: number;
   onServingsChange: (servings: number) => void;
-  onElevate: (customization?: string) => void;
-  onSimplify: (customization?: string) => void;
   onShoppingList: () => void;
-  isShoppingListLoading: boolean;
   messages: Record<string, string>;
 }
 
@@ -32,10 +30,7 @@ export function RecipeCard({
   onUnitSystemChange,
   servings,
   onServingsChange,
-  onElevate,
-  onSimplify,
   onShoppingList,
-  isShoppingListLoading,
   messages,
 }: RecipeCardProps) {
   // Scale factor for nutrition when servings change
@@ -59,9 +54,43 @@ export function RecipeCard({
   }));
 
   return (
-    <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
+    <div className="relative bg-card rounded-2xl border-2 border-primary/20 shadow-xl overflow-hidden">
+      {/* Animated cooking steam effect at top */}
+      <div className="absolute top-0 left-0 right-0 h-2 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-60">
+          <div
+            className="h-full bg-gradient-to-r from-primary/30 via-accent/40 to-primary/30 animate-pulse"
+            style={{ animationDuration: "2s" }}
+          />
+        </div>
+        {/* Floating steam bubbles */}
+        <div
+          className="absolute top-0 left-1/4 w-1 h-1 bg-primary/40 rounded-full animate-bounce"
+          style={{ animationDelay: "0s", animationDuration: "2.5s" }}
+        />
+        <div
+          className="absolute top-0 left-1/2 w-1.5 h-1.5 bg-accent/40 rounded-full animate-bounce"
+          style={{ animationDelay: "0.8s", animationDuration: "2.2s" }}
+        />
+        <div
+          className="absolute top-0 right-1/4 w-1 h-1 bg-primary/40 rounded-full animate-bounce"
+          style={{ animationDelay: "1.6s", animationDuration: "2.8s" }}
+        />
+      </div>
+
+      {/* Floating cooking icons */}
+      <div className="absolute top-4 right-4 opacity-20 pointer-events-none z-0">
+        <ChefHat className="w-8 h-8 text-primary animate-bounce" style={{ animationDuration: "3s" }} />
+      </div>
+      <div className="absolute top-8 right-12 opacity-15 pointer-events-none z-0">
+        <Sparkles
+          className="w-5 h-5 text-accent animate-pulse"
+          style={{ animationDelay: "1s", animationDuration: "2s" }}
+        />
+      </div>
+
       {/* Header Section */}
-      <div className="p-5">
+      <div className="relative p-5 bg-gradient-to-br from-card via-card to-accent/5">
         <RecipeHeader recipe={recipe} nutrition={scaledNutrition} scaledServings={servings} messages={messages} />
       </div>
 
@@ -89,14 +118,7 @@ export function RecipeCard({
 
       {/* Actions Section */}
       <div className="px-5 pb-5">
-        <RecipeActions
-          recipeName={recipe.name}
-          onElevate={onElevate}
-          onSimplify={onSimplify}
-          onShoppingList={onShoppingList}
-          isShoppingListLoading={isShoppingListLoading}
-          messages={messages}
-        />
+        <RecipeActions onShoppingList={onShoppingList} messages={messages} />
 
         <SettingsBar
           unitSystem={unitSystem}

@@ -97,11 +97,11 @@
   --ring: oklch(0.52 0.14 35);
 
   /* Chart colors - Food-inspired palette */
-  --chart-1: oklch(0.65 0.18 45);    /* Tomato */
-  --chart-2: oklch(0.62 0.15 145);   /* Basil */
-  --chart-3: oklch(0.72 0.14 85);    /* Turmeric */
-  --chart-4: oklch(0.55 0.12 260);   /* Eggplant */
-  --chart-5: oklch(0.68 0.16 25);    /* Carrot */
+  --chart-1: oklch(0.65 0.18 45); /* Tomato */
+  --chart-2: oklch(0.62 0.15 145); /* Basil */
+  --chart-3: oklch(0.72 0.14 85); /* Turmeric */
+  --chart-4: oklch(0.55 0.12 260); /* Eggplant */
+  --chart-5: oklch(0.68 0.16 25); /* Carrot */
 
   /* Sidebar */
   --sidebar: oklch(0.975 0.01 75);
@@ -124,11 +124,11 @@
   --foreground: oklch(0.94 0.01 75);
 
   /* Card - slightly lifted */
-  --card: oklch(0.20 0.018 45);
+  --card: oklch(0.2 0.018 45);
   --card-foreground: oklch(0.94 0.01 75);
 
   /* Popover */
-  --popover: oklch(0.20 0.018 45);
+  --popover: oklch(0.2 0.018 45);
   --popover-foreground: oklch(0.94 0.01 75);
 
   /* Primary - Warm copper/terracotta glow */
@@ -156,11 +156,11 @@
   --ring: oklch(0.68 0.15 45);
 
   /* Chart colors - Jewel tones */
-  --chart-1: oklch(0.70 0.18 40);    /* Copper */
-  --chart-2: oklch(0.65 0.14 160);   /* Jade */
-  --chart-3: oklch(0.75 0.15 90);    /* Gold */
-  --chart-4: oklch(0.60 0.16 290);   /* Amethyst */
-  --chart-5: oklch(0.68 0.18 20);    /* Coral */
+  --chart-1: oklch(0.7 0.18 40); /* Copper */
+  --chart-2: oklch(0.65 0.14 160); /* Jade */
+  --chart-3: oklch(0.75 0.15 90); /* Gold */
+  --chart-4: oklch(0.6 0.16 290); /* Amethyst */
+  --chart-5: oklch(0.68 0.18 20); /* Coral */
 
   /* Sidebar */
   --sidebar: oklch(0.18 0.018 45);
@@ -185,7 +185,12 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display), Georgia, serif;
   }
 }
@@ -250,12 +255,7 @@
 
   /* Loading shimmer */
   .shimmer {
-    background: linear-gradient(
-      90deg,
-      var(--muted) 0%,
-      var(--card) 50%,
-      var(--muted) 100%
-    );
+    background: linear-gradient(90deg, var(--muted) 0%, var(--card) 50%, var(--muted) 100%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
   }
@@ -283,6 +283,59 @@
       transform: scaleX(1);
     }
   }
+
+  /* Cooking animations */
+  @keyframes steamRise {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-20px) scale(1.2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes bubbleFloat {
+    0% {
+      transform: translateY(0) scale(0.8);
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-15px) scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sizzle {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
+  .cooking-steam {
+    animation: steamRise 3s ease-out infinite;
+  }
+
+  .cooking-bubble {
+    animation: bubbleFloat 2s ease-out infinite;
+  }
+
+  .cooking-sizzle {
+    animation: sizzle 1.5s ease-in-out infinite;
+  }
 }
 
 /* ===========================
@@ -309,7 +362,7 @@
   }
 
   .tab-active::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -1px;
     left: 0;
@@ -343,9 +396,3 @@
     @apply text-rose-700 dark:text-rose-300;
   }
 }
-
-/* ===========================
-   Google Fonts Import
-   DM Serif Display + DM Sans pairing
-   =========================== */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap');

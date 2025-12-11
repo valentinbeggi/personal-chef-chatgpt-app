@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import type { Instruction } from "@/types";
 import { formatTime } from "@/utils/units";
-import { Clock, Lightbulb, Check } from "lucide-react";
+import { Clock, Lightbulb, Check, ChefHat } from "lucide-react";
 import { useState } from "react";
 
 interface InstructionsTabProps {
@@ -52,9 +52,10 @@ export function InstructionsTab({ instructions, chefTips, messages }: Instructio
                   "absolute left-0 top-0 w-8 h-8 rounded-full flex items-center justify-center transition-all",
                   "text-sm font-bold border-2",
                   isCompleted
-                    ? "bg-primary border-primary text-primary-foreground"
-                    : "bg-background border-muted-foreground/30 text-muted-foreground hover:border-primary/50",
+                    ? "bg-primary border-primary text-primary-foreground animate-pulse"
+                    : "bg-background border-muted-foreground/30 text-muted-foreground hover:border-primary/50 hover:scale-110",
                 )}
+                style={!isCompleted ? { transition: "all 0.2s ease" } : { animationDuration: "2s" }}
               >
                 {isCompleted ? <Check className="w-4 h-4" /> : instruction.step}
               </button>
@@ -93,9 +94,9 @@ export function InstructionsTab({ instructions, chefTips, messages }: Instructio
 
       {/* Chef Tips Section */}
       {chefTips && chefTips.length > 0 && (
-        <div className="mt-6 pt-6 border-t border-border">
+        <div className="mt-6 pt-6 border-t border-border relative">
           <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground uppercase tracking-wide mb-3">
-            <span>👨‍🍳</span>
+            <ChefHat className="w-4 h-4 text-primary animate-bounce" style={{ animationDuration: "2.5s" }} />
             <span>{messages["labels.chefTips"]}</span>
           </h3>
           <ul className="space-y-2">

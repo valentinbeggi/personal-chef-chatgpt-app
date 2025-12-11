@@ -10,9 +10,6 @@ import type {
   RecipeStructuredContent,
   RecipeMeta,
   NutritionBreakdownItem,
-  ShoppingListSection,
-  ShoppingListResult,
-  IngredientCategory,
 } from "./types/index.js";
 
 const resend = new Resend(env.RESEND_API_KEY);
@@ -167,122 +164,6 @@ server.widget(
     }
   },
 );
-
-const SECTION_CONFIG: Record<IngredientCategory, { name: string; emoji: string; order: number }> = {
-  produce: { name: "Produce", emoji: "🥬", order: 1 },
-  meat_seafood: { name: "Meat & Seafood", emoji: "🥩", order: 2 },
-  dairy_eggs: { name: "Dairy & Eggs", emoji: "🥛", order: 3 },
-  bakery: { name: "Bakery", emoji: "🥖", order: 4 },
-  frozen: { name: "Frozen", emoji: "🧊", order: 5 },
-  pantry: { name: "Pantry", emoji: "🥫", order: 6 },
-  spices: { name: "Spices", emoji: "🧂", order: 7 },
-};
-
-server.tool(
-  "generate_shopping_list",
-  "Organizes recipe ingredients into a shopping list grouped by store section. Call this from the recipe widget to generate a formatted shopping list.",
-  {
-    recipe_name: z.string().describe("Name of the recipe"),
-    original_servings: z.number().describe("Original number of servings in the recipe"),
-    desired_servings: z.number().describe("Desired number of servings to shop for"),
-    ingredients: z
-      .array(
-        z.object({
-          id: z.string().describe("Unique identifier for the ingredient"),
-          englishName: z.string().describe("English ingredient name"),
-          displayName: z.string().describe("Localized ingredient name for display"),
-          quantity: z.number(),
-          unit: z.string(),
-          category: z.enum(["produce", "meat_seafood", "dairy_eggs", "bakery", "frozen", "pantry", "spices"]),
-        }),
-      )
-      .describe("List of ingredients to include in the shopping list"),
-  },
-  async ({ recipe_name, original_servings, desired_servings, ingredients }): Promise<CallToolResult> => {
-    try {
-      const scaleFactor = desired_servings / original_servings;
-
-      const sectionMap = new Map<IngredientCategory, ShoppingListSection>();
-
-      for (const ing of ingredients) {
-        const config = SECTION_CONFIG[ing.category];
-
-        if (!sectionMap.has(ing.category)) {
-          sectionMap.set(ing.category, {
-            name: config.name,
-            category: ing.category,
-            emoji: config.emoji,
-            order: config.order,
-            items: [],
-          });
-        }
-
-        const scaledQuantity = Math.round(ing.quantity * scaleFactor * 100) / 100;
-        const displayQuantity = formatQuantity(scaledQuantity);
-
-        sectionMap.get(ing.category)!.items.push({
-          id: ing.id,
-          name: ing.displayName,
-          quantity: scaledQuantity,
-          unit: ing.unit,
-          display: `${displayQuantity} ${ing.unit} ${ing.displayName}`,
-          checked: false,
-        });
-      }
-
-      const sections = Array.from(sectionMap.values()).sort((a, b) => a.order - b.order);
-
-      const result: ShoppingListResult = {
-        recipe_name,
-        servings: desired_servings,
-        sections,
-        total_items: ingredients.length,
-      };
-
-      return {
-        structuredContent: result as unknown as Record<string, unknown>,
-        content: [
-          {
-            type: "text",
-            text: `Shopping list for ${recipe_name} (${desired_servings} servings): ${ingredients.length} items across ${sections.length} store sections.`,
-          },
-        ],
-        isError: false,
-      };
-    } catch (error) {
-      return {
-        content: [{ type: "text", text: `Error generating shopping list: ${error}` }],
-        isError: true,
-      };
-    }
-  },
-);
-
-function formatQuantity(quantity: number): string {
-  if (quantity === Math.floor(quantity)) {
-    return quantity.toString();
-  }
-
-  const fractions: Record<number, string> = {
-    0.25: "¼",
-    0.33: "⅓",
-    0.5: "½",
-    0.67: "⅔",
-    0.75: "¾",
-  };
-
-  const decimal = quantity - Math.floor(quantity);
-  const roundedDecimal = Math.round(decimal * 100) / 100;
-
-  for (const [value, symbol] of Object.entries(fractions)) {
-    if (Math.abs(roundedDecimal - parseFloat(value)) < 0.05) {
-      const whole = Math.floor(quantity);
-      return whole > 0 ? `${whole}${symbol}` : symbol;
-    }
-  }
-
-  return quantity.toFixed(2).replace(/\.?0+$/, "");
-}
 
 server.tool(
   "send_shopping_list_email",

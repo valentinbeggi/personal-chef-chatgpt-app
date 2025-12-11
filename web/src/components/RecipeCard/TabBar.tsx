@@ -29,11 +29,13 @@ export function TabBar({ activeTab, onTabChange, messages }: TabBarProps) {
           aria-selected={activeTab === id}
           role="tab"
         >
-          <Icon className="w-4 h-4" />
+          <Icon
+            className={cn("w-4 h-4 transition-transform", activeTab === id && "animate-pulse")}
+            style={{ animationDuration: "2s" }}
+          />
           <span className="hidden sm:inline">{messages[messageKey]}</span>
         </button>
       ))}
     </div>
   );
 }
-
