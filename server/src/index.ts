@@ -26,6 +26,8 @@ app.listen(3000, (error) => {
   console.log(
     "Make your local server accessible with 'ngrok http 3000' and connect to ChatGPT with URL https://xxxxxx.ngrok-free.app/mcp",
   );
+
+  throw new Error("test");
 });
 
 process.on("SIGINT", async () => {
