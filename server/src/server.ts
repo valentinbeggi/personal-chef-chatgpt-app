@@ -260,7 +260,7 @@ server.tool(
 
       if (error) {
         return {
-          content: [{ type: "text", text: `Failed to send email: ${error.message}` }],
+          content: [{ type: "text", text: `Failed to sends email: ${error.message}` }],
           isError: true,
         };
       }
